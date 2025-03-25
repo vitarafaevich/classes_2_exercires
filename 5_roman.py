@@ -8,11 +8,34 @@ class RomanNumber:
     decimal_couple = {'CM': 900, 'CD': 400, 'XC': 90, 'XL': 40, 'IX': 9, 'IV': 4}
 
     def __init__(self, number):
-        if isinstance(number, str) and self.is_roman(number):
-            self.rom_value = number
+        if isinstance(number, int):
+            if self.is_int(number):
+                self.int_value = number
+                self.rom_value = RomanNumber.roman_number(self)
+            else:
+                self.int_value = None
+                self.rom_value = None
+                print('error: Incorrect Roman or Regular number')
         else:
-            self.rom_value = None
-            print('error: Incorrect Roman number')
+            if self.is_roman(number):
+                self.rom_value = number
+                self.int_value = RomanNumber.decimal_number(self)
+            else:
+                self.rom_value = None
+                print('error: Incorrect Roman or Regular number')
+
+
+    @staticmethod
+    def is_int(value):
+        """
+        Static method is_int(value): check if the decimal number can be transferred to roman one
+        :param value: the Roman number that is being checked
+        :return: boolean (True or False)
+        """
+        if 0 < value < 4000:
+            return True
+        else:
+            return False
 
     @staticmethod
     def is_roman(value):
@@ -80,24 +103,46 @@ class RomanNumber:
         else:
             return None
 
+    def roman_number(self):
+        """
+        Method roman_number(self): transfer decimal number to the roman one
+        :return decimal_value: roman value of the decimal number
+        """
+        if self.int_value is None:
+            return None
+        roman = ''
+        num = self.int_value
+        for value, numeral in RomanNumber.decimal_dict.items():
+            while num >= numeral:
+                roman += value
+                num -= numeral
+        return roman
+
+    '''
+    def __repr__(self):
+        if self.rom_value:
+            return f'{self.rom_value}'
+        elif self.int_value:
+            return str(self.int_value)
+        else:
+            return "Invalid Roman Number"
+    '''
+
+
     def __repr__(self):
         return f'{self.rom_value}' if self.rom_value else "Invalid Roman Number"
 
 
-num_1 = RomanNumber('VI')
+num_1 = RomanNumber(214)
+print(num_1.int_value)
+print(num_1.roman_number())
 print(num_1.rom_value)
-print(num_1.decimal_number())
 print(num_1)
-num_2 = RomanNumber('IIII')
-print(num_2.rom_value)
-num_3 = RomanNumber('XXIV')
-print(num_3.decimal_number())
-num_4 = RomanNumber('QER2')
-nums = []
-nums.append(num_1)
-nums.append(num_2)
-nums.append(num_3)
-nums.append(num_4)
-print(nums)
-print(RomanNumber.is_roman('MMMCMLXXXVI'))
-print(RomanNumber.is_roman('MMMMLXXXVI'))
+num_2 = RomanNumber(5690)
+print(num_2.int_value)
+num_3 = RomanNumber('DXCVII')
+print(num_3.int_value)
+print(num_3.rom_value)
+print(num_3)
+print(RomanNumber.is_int(-614))
+print(RomanNumber.is_int(3758))
