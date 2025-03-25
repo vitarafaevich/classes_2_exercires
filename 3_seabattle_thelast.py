@@ -106,25 +106,27 @@ class NavalBattle:
                             if cls.playing_field[y_triple + i][x_triple] == 0:
                                 cnt += 1
 
+                        #REWRITING THE VERTICAL POSITIONING!!!
                         if cnt == 3:
                             # checking that cages near the ship are empty
                             final = 0
                             # left touch
-                            if x_triple == 0:
-                                if y_triple == 0:
+                            if y_triple == 0:
+                                if x_triple == 0:
                                     for i in range(cnt):
-                                        if cls.playing_field[y_triple][x_triple + i] == 0 and cls.playing_field[y_triple + 1][x_triple + i] == 0:
+                                        if (cls.playing_field[y_triple + i][x_triple] == 0 and
+                                                cls.playing_field[y_triple + i][x_triple + 1] == 0):
                                             final += 1
-                                elif y_triple == 9:
+                                elif y_triple + cnt - 1== 9:
                                     for i in range(cnt):
-                                        if cls.playing_field[y_triple][x_triple + i] == 0 and cls.playing_field[y_triple - 1][x_triple + i] == 0:
+                                        if (cls.playing_field[y_triple - 1 + i][x_triple] == 0 and
+                                                cls.playing_field[y_triple - 1 + i][x_triple + 1] == 0):
                                             final += 1
                                 # middle touch
                                 else:
-                                    for i in range(cnt):
-                                        if (cls.playing_field[y_triple][x_triple + i] == 0 and
-                                                cls.playing_field[y_triple - 1][x_triple + i] == 0 and
-                                                cls.playing_field[y_triple + 1][x_triple + i] == 0):
+                                    for i in range(cnt+1):
+                                        if (cls.playing_field[y_triple - 1 + i][x_triple] == 0 and
+                                                cls.playing_field[y_triple - 1 + i][x_triple + 1] == 0):
                                             final += 1
 
                             # right touch
@@ -147,42 +149,105 @@ class NavalBattle:
                                                 cls.playing_field[y_triple + 1][x_triple + cnt - 1 - i] == 0):
                                             final += 1
 
-                            # middle touch
-                            '''
-                            elif y_triple == 0:
-                                for i in range(cnt):
-                                    if (cls.playing_field[y_triple][x_triple + cnt - 1 - i] == 0 and
-                                            cls.playing_field[y_triple - 1][x_triple + cnt - 1 - i] == 0 and
-                                            cls.playing_field[y_triple + 1][x_triple + cnt - 1 - i] == 0):
-                                        final += 1
-                            '''
-
-
-
-
-
-
-
-                            if cls.playing_field[y_triple + i][x_triple] == 0
-
+                            # middle touch (two middle exceptions)
+                            elif y_triple == 0 or y_triple == 9:
+                                if y_triple == 0:
+                                    for i in range(cnt):
+                                        if (cls.playing_field[y_triple][x_triple - 1 + i] == 0 and
+                                                cls.playing_field[y_triple][x_triple + i] == 0 and
+                                                cls.playing_field[y_triple + 1][x_triple - 1 + i] == 0):
+                                            final += 1
+                                else:
+                                    for i in range(cnt):
+                                        if (cls.playing_field[y_triple][x_triple - 1 + i] == 0 and
+                                                cls.playing_field[y_triple][x_triple + i] == 0 and
+                                                cls.playing_field[y_triple - 1][x_triple - 1 + i] == 0):
+                                            final += 1
 
                             # final positioning of the ship
-                            for j in range(3):
-                                cls.playing_field[y_triple + j][x_triple] = '1'
+                            if final == 1:
+                                for j in range(cnt):
+                                    cls.playing_field[y_triple + j][x_triple] = '1'
 
+            # horizontal three-decked
             else:
                 flag = False
                 while flag is not True:
                     x_triple = random.randint(0, 9)
                     y_triple = random.randint(0, 9)
-                    if (x_triple + 1 < 9) and (
-                            x_triple + 2 <= 9) and (cls.playing_field[y_triple][x_triple] == 0) and (
-                            cls.playing_field[y_triple][x_triple + 1] == 0) and (
-                            cls.playing_field[y_triple][x_triple + 2] == 0):
 
-                        cls.playing_field[y_triple][x_triple] = '1'
-                        cls.playing_field[y_triple][x_triple + 1] = '1'
-                        cls.playing_field[y_triple][x_triple + 2] = '1'
+                    cnt = 0
+                    if x_triple + 2 <= 9:
+                        for i in range(3):
+                            if cls.playing_field[y_triple][x_triple + i] == 0:
+                                cnt += 1
+
+                        # FOR HORIZONTAL POSITIONING!!!
+                        if cnt == 3:
+                            # checking that cages near the ship are empty
+                            final = 0
+                            # left touch
+                            if x_triple == 0:
+                                if y_triple == 0:
+                                    for i in range(cnt):
+                                        if (cls.playing_field[y_triple][x_triple + i] == 0 and
+                                                cls.playing_field[y_triple + 1][x_triple + i] == 0):
+                                            final += 1
+                                elif y_triple == 9:
+                                    for i in range(cnt):
+                                        if (cls.playing_field[y_triple][x_triple + i] == 0 and
+                                                cls.playing_field[y_triple - 1][x_triple + i] == 0):
+                                            final += 1
+                                # middle touch
+                                else:
+                                    for i in range(cnt):
+                                        if (cls.playing_field[y_triple][x_triple + i] == 0 and
+                                                cls.playing_field[y_triple - 1][x_triple + i] == 0 and
+                                                cls.playing_field[y_triple + 1][x_triple + i] == 0):
+                                            final += 1
+
+                            # right touch
+                            elif x_triple + cnt - 1 == 9:
+                                if y_triple == 0:
+                                    for i in range(cnt):
+                                        if (cls.playing_field[y_triple][x_triple + cnt - 1 - i] == 0 and
+                                                cls.playing_field[y_triple + 1][x_triple + cnt - 1 - i] == 0):
+                                            final += 1
+                                elif y_triple == 9:
+                                    for i in range(cnt):
+                                        if (cls.playing_field[y_triple][x_triple + cnt - 1 - i] == 0 and
+                                                cls.playing_field[y_triple + 1][x_triple + i] == 0):
+                                            final += 1
+                                # middle touch
+                                else:
+                                    for i in range(cnt):
+                                        if (cls.playing_field[y_triple][x_triple + cnt - 1 - i] == 0 and
+                                                cls.playing_field[y_triple - 1][x_triple + cnt - 1 - i] == 0 and
+                                                cls.playing_field[y_triple + 1][x_triple + cnt - 1 - i] == 0):
+                                            final += 1
+
+                            # middle touch (two middle exceptions)
+                            elif y_triple == 0 or y_triple == 9:
+                                if y_triple == 0:
+                                    for i in range(cnt):
+                                        if (cls.playing_field[y_triple][x_triple - 1 + i] == 0 and
+                                                cls.playing_field[y_triple][x_triple + i] == 0 and
+                                                cls.playing_field[y_triple + 1][x_triple - 1 + i] == 0):
+                                            final += 1
+                                else:
+                                    for i in range(cnt):
+                                        if (cls.playing_field[y_triple][x_triple - 1 + i] == 0 and
+                                                cls.playing_field[y_triple][x_triple + i] == 0 and
+                                                cls.playing_field[y_triple - 1][x_triple - 1 + i] == 0):
+                                            final += 1
+
+                            # final positioning of the ship
+                            if final == 1:
+                                for j in range(cnt):
+                                    cls.playing_field[y_triple + j][x_triple] = '1'
+
+
+
 
         # two-decked ships
         for _ in range(3):
@@ -237,6 +302,7 @@ player1.shot(1,1)
 NavalBattle.new_game()
 NavalBattle.show()
 player1.shot(6, 2)
+
 
 
 '''
@@ -394,3 +460,75 @@ player1.shot(1, 1)
 NavalBattle.new_game()
 NavalBattle.show()
 '''
+
+
+
+
+#FOR HORIZONTAL POSITIONING NOT VERTICAL!!!
+'''
+:param cnt_y: vertical
+:param cnt_x: horizontal
+=> 0 or 1 depending on position
+'''
+if cnt_x == 3:
+    # checking that cages near the ship are empty
+    final = 0
+    # left touch
+    if x_triple == 0:
+        if y_triple == 0:
+            for i in range(cnt_x + cnt_y):
+                if (cls.playing_field[y_triple + cnt_y][x_triple + i] == 0 and
+                        cls.playing_field[y_triple + 1][x_triple + i] == 0):
+                    final += 1
+        elif y_triple == 9:
+            for i in range(cnt_x + cnt_y)):
+                if (cls.playing_field[y_triple + cnt_y][x_triple + i] == 0 and
+                        cls.playing_field[y_triple - 1][x_triple + i] == 0):
+                    final += 1
+        # middle touch
+        else:
+            for i in range(cnt_x + cnt_y)):
+                if (cls.playing_field[y_triple][x_triple + i] == 0 and
+                        cls.playing_field[y_triple - 1][x_triple + i] == 0 and
+                        cls.playing_field[y_triple + 1][x_triple + i] == 0):
+                    final += 1
+
+    # right touch
+    elif x_triple + cnt_x - 1 == 9:
+        if y_triple == 0:
+            for i in range(cnt_x + cnt_y):
+                if (cls.playing_field[y_triple + cnt_y][x_triple + cnt_x - 1 - i] == 0 and
+                        cls.playing_field[y_triple + 1][x_triple + cnt_x - 1 - i]  == 0):
+                    final += 1
+        elif y_triple == 9:
+            for i in range(cnt_x):
+                if (cls.playing_field[y_triple][x_triple + cnt_x - 1 - i] == 0 and
+                        cls.playing_field[y_triple + 1][x_triple + i] == 0):
+                    final += 1
+        # middle touch
+        else:
+            for i in range(cnt_x):
+                if (cls.playing_field[y_triple][x_triple + cnt_x - 1 - i] == 0 and
+                        cls.playing_field[y_triple - 1][x_triple + cnt_x - 1 - i] == 0 and
+                        cls.playing_field[y_triple + 1][x_triple + cnt_x - 1 - i] == 0):
+                    final += 1
+
+    # middle touch (two middle exceptions)
+    elif y_triple == 0 or y_triple == 9:
+        if y_triple == 0:
+            for i in range(cnt_x):
+                if (cls.playing_field[y_triple][x_triple - 1 + i] == 0 and
+                        cls.playing_field[y_triple][x_triple + i] == 0 and
+                        cls.playing_field[y_triple + 1][x_triple - 1 + i] == 0):
+                    final += 1
+        else:
+            for i in range(cnt):
+                if (cls.playing_field[y_triple][x_triple - 1 + i] == 0 and
+                        cls.playing_field[y_triple][x_triple + i] == 0 and
+                        cls.playing_field[y_triple - 1][x_triple - 1 + i] == 0):
+                    final += 1
+
+    # final positioning of the ship
+    if final == 1:
+        for j in range(cnt_x):
+            cls.playing_field[y_triple + j][x_triple] = '1'
