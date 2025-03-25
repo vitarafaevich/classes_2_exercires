@@ -18,13 +18,17 @@ class RomanNumber:
                 self.int_value = None
                 self.rom_value = None
                 print('error: Incorrect Roman or Regular number')
-        else:
+        elif isinstance(number, str):
             if self.is_roman(number):
                 self.rom_value = number
                 self.int_value = RomanNumber.decimal_number(self)
             else:
                 self.rom_value = None
                 print('error: Incorrect Roman or Regular number')
+        else:
+            self.rom_value = None
+            self.int_value = None
+            print('error: Incorrect Roman or Regular number')
 
 
     @staticmethod
@@ -120,31 +124,103 @@ class RomanNumber:
                 num -= numeral
         return roman
 
-    '''
-    def __repr__(self):
-        if self.rom_value:
-            return f'{self.rom_value}'
-        elif self.int_value:
-            return str(self.int_value)
-        else:
-            return "Invalid Roman Number"
-    '''
-
     def __repr__(self):
         return str(self.rom_value)
 
+    def __add__(self, other):
+        result = self.int_value + other.int_value
+        return RomanNumber(result)
+
+    def __sub__(self, other):
+        result = self.int_value - other.int_value
+        return RomanNumber(result)
+
+    def __mul__(self, other):
+        result = self.int_value * other.int_value
+        return RomanNumber(result)
+
+    def __truediv__(self, other):
+        result = self.int_value / other.int_value
+        if str(result)[-1] == '0':
+            result = int(result)
+        return RomanNumber(result)
+
+    def __floordiv__(self, other):
+        result = self.int_value // other.int_value
+        return RomanNumber(result)
+
+    def __mod__(self, other):
+        result = self.int_value % other.int_value
+        return RomanNumber(result)
+
+    def __pow__(self, other):
+        result = self.int_value ** other.int_value
+        return RomanNumber(result)
+
+    def __iadd__(self, other):
+        result = self.int_value
+        result += other.int_value
+        return RomanNumber(result)
+
+    def __isub__(self, other):
+        result = self.int_value
+        result -= other.int_value
+        return RomanNumber(result)
+
+    def __imul__(self, other):
+        result = self.int_value
+        result = result * other.int_value
+        return RomanNumber(result)
+
+    def __itruediv__(self, other):
+        result = self.int_value
+        result = result / other.int_value
+        if str(result)[-1] == '0':
+            result = int(result)
+        return RomanNumber(result)
+
+    def __ifloordiv__(self, other):
+        result = self.int_value
+        result //= other.int_value
+        return RomanNumber(result)
+
+    def __ipow__(self, other):
+        result = self.int_value
+        result **= other.int_value
+        return RomanNumber(result)
+
+    def __imod__(self, other):
+        result = self.int_value
+        result %= other.int_value
+        return RomanNumber(result)
 
 
-num_1 = RomanNumber(214)
-print(num_1.int_value)
-print(num_1.roman_number())
-print(num_1.rom_value)
-print(num_1)
-num_2 = RomanNumber(5690)
-print(num_2.int_value)
-num_3 = RomanNumber('DXCVII')
-print(num_3.int_value)
-print(num_3.rom_value)
-print(num_3)
-print(RomanNumber.is_int(-614))
-print(RomanNumber.is_int(3758))
+a = RomanNumber('XI')
+b = RomanNumber('VII')
+c = a + b
+print(c)
+d = RomanNumber('XII')
+print(c - d)
+e = RomanNumber('XXXIV')
+f = e * a
+print(f)
+print(f / RomanNumber('II') )
+g = f / b
+print(g.rom_value)
+print(f // b)
+print(f % b)
+print(RomanNumber('II') ** RomanNumber('X'))
+a -= b
+print(a)
+b += RomanNumber('XX')
+print(b)
+b /= RomanNumber('III')
+print(b)
+b *= a
+print(b)
+b /= RomanNumber('X')
+print(b)
+e //= RomanNumber('X')
+print(e)
+e %= RomanNumber('II')
+print(e)

@@ -81,7 +81,7 @@ class RomanNumber:
             return None
 
     def __repr__(self):
-        return f'{self.rom_value}' if self.rom_value else "Invalid Roman Number"
+        return str(self.rom_value)
 
 
 num_1 = RomanNumber('VI')
