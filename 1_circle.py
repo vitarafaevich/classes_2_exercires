@@ -9,8 +9,6 @@ task 1
 Так же, опишите статический метод total_area(), который возвращает суммарную площадь всех экземпляров класса Circle.
 """
 
-
-
 class Circle:
     """
     Class representing a circle
@@ -24,18 +22,20 @@ class Circle:
 
     def area(self):
         """
-        Method area: counting the area of the circle
+        Method area(): counting the area of the circle
+        :return: the area of the circle
         """
         return Circle.pi * self.radius ** 2
 
-    def __str__(self):
-        return f'{self.radius}'
-
-    def __len__(self):
-        return len(self.all_circles)
+    def __repr__(self):
+        return str(self.radius)
 
     @staticmethod
     def total_area():
+        """
+        Method total_area(): counting the area of the circle
+        :return: the summarized area of the circles
+        """
         total = 0
         for circle in Circle.all_circles:
             total += circle.area()
