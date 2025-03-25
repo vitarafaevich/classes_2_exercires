@@ -128,7 +128,8 @@ class NavalBattle:
                                         if (cls.playing_field[y_triple - 1 + i][x_triple] == 0 and
                                                 cls.playing_field[y_triple - 1 + i][x_triple + 1] == 0):
                                             final += 1
-
+        #FROM HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+        #--______--
                             # right touch
                             elif x_triple + cnt - 1 == 9:
                                 if y_triple == 0:
