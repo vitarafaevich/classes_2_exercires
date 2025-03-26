@@ -10,6 +10,7 @@ class RomanNumber:
                     'V': 5, 'IV': 4, 'I': 1}
     decimal_couple = {'CM': 900, 'CD': 400, 'XC': 90, 'XL': 40, 'IX': 9, 'IV': 4}
 
+
     def __init__(self, number):
         if isinstance(number, int):
             if self.is_int(number):
@@ -39,6 +40,7 @@ class RomanNumber:
             return True
         else:
             return False
+
 
     @staticmethod
     def is_roman(value):
@@ -86,6 +88,7 @@ class RomanNumber:
                 i += 1
         return True
 
+
     def decimal_number(self):
         """
         Method decimal_number(self): transfer roman number to the decimal one
@@ -106,6 +109,7 @@ class RomanNumber:
         else:
             return None
 
+
     def roman_number(self):
         """
         Method roman_number(self): transfer decimal number to the roman one
@@ -121,8 +125,10 @@ class RomanNumber:
                 num -= numeral
         return roman
 
+
     def __repr__(self):
         return str(self.rom_value)
+
 
 
 

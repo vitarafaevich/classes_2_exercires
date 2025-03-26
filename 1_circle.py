@@ -1,14 +1,3 @@
-"""
-task 1
-Опишите класс окружности Circle. 
-Класс должен содержать атрибут класса all_circles со списком всех экземпляров этого класса. 
-Экземпляр класса может быть инициализирован необязательным параметром радиусом. 
-В случае, если параметр не задан, экземпляр создается с единичным радиусом. 
-Класс должен иметь атрибут класса рі (со значением 3.1415). 
-Метод area() должен возвращать площадь круга. 
-Так же, опишите статический метод total_area(), который возвращает суммарную площадь всех экземпляров класса Circle.
-"""
-
 class Circle:
     """
     Class representing a circle
@@ -42,13 +31,15 @@ class Circle:
         return total
 
 
+
+
 c1 = Circle()
 c2 = Circle(7)
 c3 = Circle(5)
 print(c2.area())
 print(c3)
 print(Circle.pi)
-print(Circle.all_circles) #problems
+print(Circle.all_circles)
 print(Circle.total_area())
 print(len(c3.__class__.all_circles))
 

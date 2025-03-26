@@ -1,11 +1,15 @@
 class NavalBattle:
     """
     Class representing the Naval Battle (Sea Battle) game for 2 people
+    :method show():
+    :method shot(self, x, y):
     """
     playing_field = []
 
+
     def __init__(self, player):
         self.player = player
+
 
     @staticmethod
     def show():
@@ -25,6 +29,7 @@ class NavalBattle:
         for elem in lis:
             print(''.join([str(j) for j in elem]))
 
+
     def shot(self, x, y):
         """
         Method shot: revealing the shots accuracy
@@ -35,6 +40,8 @@ class NavalBattle:
         else:
             print('попал')
             NavalBattle.playing_field[y - 1][x - 1] = self.player
+
+
 
 
 NavalBattle.playing_field = [[0, 1, 1, 1, 0, 0, 0, 0, 0, 1],

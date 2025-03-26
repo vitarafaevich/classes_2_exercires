@@ -9,8 +9,10 @@ class NavalBattle:
     """
     playing_field = []
 
+
     def __init__(self, player):
         self.player = player
+
 
     @staticmethod
     def show():
@@ -60,6 +62,7 @@ class NavalBattle:
             else:
                 print('You hit the target!')
                 NavalBattle.playing_field[y - 1][x - 1] = self.player
+
 
     @classmethod
     def new_game(cls):
@@ -120,6 +123,8 @@ class NavalBattle:
                             else:
                                 cls.playing_field[y][x + i] = 1
                         placed = True
+
+
 
 
 player1 = NavalBattle('#')
